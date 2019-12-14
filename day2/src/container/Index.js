@@ -4,10 +4,14 @@ import {getIndexList} from '../store/index';
 
 function Index(props) {
     const [count, setCount] = useState(1);
+    // async data display on homepage
     useEffect(() => {
-        props.getIndexList()
+        if (!props.list.length) {
+            // to fetch data from client side
+            props.getIndexList();
+        }
     }, []);
-    return <div>
+    return (<div>
         <h1>Hello {props.title} ! {count}</h1>
         <button onClick={() => setCount(count + 1)}>累加</button>
         <hr/>
@@ -16,8 +20,12 @@ function Index(props) {
                 return <li key={item.id}>{item.name}</li>
             })}
         </ul>
-    </div>
+    </div>);
 }
+
+Index.loadData = (store) => {
+    return store.dispatch(getIndexList());
+};
 
 export default connect(
     state => ({list: state.index.list}),

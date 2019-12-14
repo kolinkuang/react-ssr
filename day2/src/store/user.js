@@ -2,21 +2,21 @@
 import axios from 'axios';
 
 // actionType
-const GET_LIST = 'INDEX/GET_LIST';
+const GET_LIST = 'INDEX/USER_INFO';
 
 // actionCreator
-const changeList = list => ({
+const changeUserInfo = data => ({
     type: GET_LIST,
-    list
+    data: data
 });
 
-export const getIndexList = server => {
+export const getUserInfo = server => {
     return (dispatch, getState, axiosInstance) => {
-        return axios.get('http://localhost:9090/api/course/list')
+        return axios.get('http://localhost:9090/api/user/info')
             .then(res => {
-                const {list} = res.data;
-                console.log('list', list);
-                dispatch(changeList(list));
+                const {data} = res.data;
+                console.log('User info', data);
+                dispatch(changeUserInfo(data));
             }).catch(e => {
                 console.error('Error thrown', e);
             });
@@ -24,16 +24,15 @@ export const getIndexList = server => {
 };
 
 const defaultState = {
-    list: []
+    userInfo: []
 };
 
 export default (state = defaultState, action) => {
     if (action.type === GET_LIST) {
-        const newState = {
+        return {
             ...state,
-            list: action.list
+            userInfo: action.data
         };
-        return newState;
     } else {
         return state;
     }
