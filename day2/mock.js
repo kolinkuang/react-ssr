@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 
 app.get('/api/user/info', (req, res) => {
+    // TODO: Aggregate all request that sent to SSR server as a proxy to avoid cross site access problem
     // support cross site calling
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
