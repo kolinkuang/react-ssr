@@ -18,7 +18,7 @@ export const getUserInfo = server => {
                 console.log('User info', data);
                 dispatch(changeUserInfo(data));
             }).catch(e => {
-                console.error('Error thrown', e);
+                console.error('Error thrown from user.js', e);
             });
     }
 };

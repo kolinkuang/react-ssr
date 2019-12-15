@@ -12,7 +12,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                // to support import and jsx
+                // to support import and jsx syntax
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 options: {

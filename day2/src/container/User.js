@@ -10,7 +10,7 @@ function User(props) {
     </div>;
 }
 
-User.loadData = (store) => {
+User.loadData = store => {
     return store.dispatch(getUserInfo());
 };
 

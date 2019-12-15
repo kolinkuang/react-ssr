@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
 // import {Route} from 'react-router-dom';
+import React, {useState} from 'react';
 import Index from './container/Index';
 import About from './container/About';
 import User from './container/User';
+// 'A container does data fetching and then renders its corresponding sub-component.'
 
 // fetch components by updated js setting
 export default [
     {
         path: '/',
         component: Index,
-        // loadData:Index.loadData,
         exact: true,
         key: 'index'
     },
