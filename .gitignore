@@ -7,3 +7,6 @@
 /day2/build/
 /day2/public/
 /day2/node_modules/
+/day3/node_modules/
+/day3/build/bundle.js
+/day3/public/bundle.js
