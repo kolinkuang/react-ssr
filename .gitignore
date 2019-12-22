@@ -10,3 +10,7 @@
 /day3/node_modules/
 /day3/build/bundle.js
 /day3/public/bundle.js
+/day4/node_modules/
+/day4/build/bundle.js
+/day4/public/bundle.js
+/day4/public/index.csr.html

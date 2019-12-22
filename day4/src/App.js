@@ -3,8 +3,9 @@ import React, {useState} from 'react';
 import Index from './container/Index';
 import About from './container/About';
 import User from './container/User';
-import './App.css';
 import Notfound from './container/Notfound';
+
+// import './App.css';
 // 'A container does data fetching and then renders its corresponding sub-component.'
 
 // fetch components by updated js setting
@@ -28,7 +29,8 @@ export default [
         key: 'user'
     },
     {
-        component: Notfound
+        component: Notfound,
+        key: 'notfound'
     }
 ];
 

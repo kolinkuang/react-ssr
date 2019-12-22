@@ -1,4 +1,6 @@
 // the code here will be handled by babel
+import path from 'path';
+import fs from 'fs';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import express from 'express';
@@ -18,7 +20,23 @@ app.use(
     proxy({target: 'http://localhost:9090', changeOrigin: true})
 );
 
+function csrRender(res) {
+    // read CSR file and return
+    const filename = path.resolve(process.cwd(), 'public/index.csr.html');
+    const html = fs.readFileSync(filename, 'utf-8');
+    return res.send(html);
+}
+
 app.get('*', (req, res) => {
+    if (req.query._mode === 'csr') {
+        console.log('CSR degradation is triggered by URL parameters');
+        return csrRender(res);
+    }
+
+    // to open CSR by config
+
+    // to open CSR during high server payload
+
     // if (req.url.startsWith('/api/')) {
     //     // not render page, just dispatch request via axios.get
     // }
@@ -58,7 +76,9 @@ app.get('*', (req, res) => {
 });
 
 function renderPage(req, res, store) {
-    const context = {};
+    const context = {
+        css: []
+    };
     const content = renderToString(
         <Provider store={store}>
             <StaticRouter location={req.url} context={context}>
@@ -80,12 +100,17 @@ function renderPage(req, res, store) {
         res.redirect(301, context.url);
     }
 
+    const css = context.css.join('\n');
+
     // string template
     res.send(`
             <html>
                 <head>
                     <meta charset='utf-8' />
                     <title>react ssr</title>
+                    <style>
+                        ${css}
+                    </style>
                 </head>
                 <body>
                     <div id='root'>${content}</div>
